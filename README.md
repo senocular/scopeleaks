@@ -18,7 +18,7 @@ Insert the `scopeleaks.js` script into your Web page, e.g.:
 
 Insert the `scopeleaks.js` script just like any other module, e.g.:
 
-	var scopeleaks = require("../scopeleaks");
+	var scopeleaks = require("scopeleaks");
 
 ## JavaScriptCore
 
