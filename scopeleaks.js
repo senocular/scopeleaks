@@ -26,6 +26,7 @@
 				if (
 					!(scope.document && scope.document.getElementById(i) != null) &&
 					!(typeof scope.opera == 'object' && scope.opera.toString() == "[object Opera]" && i == "onhashchange") &&
+					!(window.console && window.console.firebug && i == "_firebug") &&
 					!original[i]
 				)
 					leaks.push(i);
