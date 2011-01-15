@@ -8,10 +8,10 @@
   
 	var scopeleaks = { 
 		snapshot: function () {
-			var snapshot = new Object();
+			var snapshot = {};
 
 			for (var i in scope)
-				snapshot[i] = 1;
+				snapshot[i] = true;
 
 			original = original || snapshot;
 
@@ -25,8 +25,8 @@
 			for (var i in ss)
 				if (
 					!(scope.document && scope.document.getElementById(i) != null) &&
-					!(typeof(scope.opera) == 'object' && scope.opera.toString() == "[object Opera]" && i == "onhashchange") &&
-					!original[(i)]
+					!(typeof scope.opera == 'object' && scope.opera.toString() == "[object Opera]" && i == "onhashchange") &&
+					!original[i]
 				)
 					leaks.push(i);
     
@@ -34,9 +34,9 @@
 		}
 	};
   
-	if (typeof(window) !== 'undefined') {
+	if (typeof window !== "undefined")
     	window.scopeleaks = scopeleaks;
-  	} else if (typeof(exports) !== 'undefined') {
+  	else if (typeof exports !== "undefined") {
     	exports.leaks = scopeleaks.leaks;
     	exports.snapshot = scopeleaks.snapshot;
 	}
