@@ -26,12 +26,12 @@
 			var leaks = [];
 			
 			for (var i in ss)
-				if (
-					!(scope.document && scope.document.getElementById(i) != null) &&
-					!(inOpera && i == "onhashchange") &&
-					!(inFirebug && (i == "_firebug" || i == "_FirebugCommandLine")) &&
-					!original[i]
-				)
+				if (!(
+					(scope.document && scope.document.getElementById(i) != null) ||
+					(inOpera && i == "onhashchange") ||
+					(inFirebug && (i == "_firebug" || i == "_FirebugCommandLine")) ||
+					original[i]
+				))
 					leaks.push(i);
     
 			return leaks;
