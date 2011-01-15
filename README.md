@@ -1,6 +1,6 @@
 # scopeleaks.js
 
-This small module allows for detecting if miscellaneous variables are being leaked into the global Javascript scope. It is useful to sanitize your scripts, both in __browser__ and __CommonJS__ environments.
+This small module allows for detecting if miscellaneous variables are being leaked into the global Javascript scope. It is useful to sanitize your scripts, in __browser__, __CommonJS__, and __JavaScriptCore__ environments.
 
 # Setup
 
