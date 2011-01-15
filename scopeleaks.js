@@ -29,7 +29,7 @@
 				if (
 					!(scope.document && scope.document.getElementById(i) != null) &&
 					!(inOpera && i == "onhashchange") &&
-					!(inFirebug && i == "_firebug") &&
+					!(inFirebug && (i == "_firebug" || i == "_FirebugCommandLine")) &&
 					!original[i]
 				)
 					leaks.push(i);
