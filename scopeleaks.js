@@ -39,10 +39,10 @@
 	};
   
 	if (typeof window !== "undefined")
-    	window.scopeleaks = scopeleaks;
+		window.scopeleaks = scopeleaks;
   	else if (typeof exports !== "undefined") {
-    	exports.leaks = scopeleaks.leaks;
-    	exports.snapshot = scopeleaks.snapshot;
+		exports.leaks = scopeleaks.leaks;
+		exports.snapshot = scopeleaks.snapshot;
 	}
   
 	scopeleaks.snapshot();
