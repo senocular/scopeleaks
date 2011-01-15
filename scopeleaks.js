@@ -3,9 +3,12 @@
 		typeof global !== "undefined" ? global :
 		typeof window !== "undefined" ? window :
 		this;
-
+	
 	var original = undefined;
-  
+	
+	var inOpera = (typeof scope.opera == 'object') && (scope.opera.toString() == "[object Opera]");
+	var inFirebug = (typeof scope.console == 'object') && (scope.console.firebug !== undefined);
+	
 	var scopeleaks = { 
 		snapshot: function () {
 			var snapshot = {};
@@ -22,9 +25,6 @@
 			var ss = snapshot || scopeleaks.snapshot();
 			var leaks = [];
 			
-			var inOpera = (typeof scope.opera == 'object') && (scope.opera.toString() == "[object Opera]");
-			var inFirebug = (typeof scope.console == 'object') && (scope.console.firebug !== undefined);
-
 			for (var i in ss)
 				if (
 					!(scope.document && scope.document.getElementById(i) != null) &&
