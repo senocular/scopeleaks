@@ -10,7 +10,11 @@
 				y = 2;
 			})();
 			
-			console.log(scopeleaks.leaks().toString()); // x and y will leak, due to not having being declared as "var"s.
+			console.assert(scopeleaks.leaks().join(",") == "x,y", "non-local function variables leaked into global");
+			scopeleaks.snapshot();
+			console.assert(scopeleaks.leaks().join(",") == "x,y", "previous leaks not cleared with second snapshot");
+			scopeleaks.snapshot(true);
+			console.assert(scopeleaks.leaks().join(",") == "", "previous leaks cleared with new defaulted snapshot");
 			
 			/*
 			 * specific test for IE/Opera DOM insertion ID leakage
@@ -20,14 +24,17 @@
 			(function() {
 				var ael = window.addEventListener;
 				(ael||window.attachEvent)(ael?"load":"onload", function(e) {
-					var p = document.createElement("p");
+					
+					scopeleaks.snapshot(true);
 
+					var p = document.createElement("p");
 					p.setAttribute("id", "bar");
 					p.innerHTML = "injected DOM paragraph";
-
 					document.body.appendChild(p);
 
-					console.log(scopeleaks.leaks().toString());
+					console.assert(scopeleaks.leaks().join(",") == "", "id of injected DOM element not reported");
+
+					console.log("Testing complete (0 Assertions means pass)");
 				}, false);
 			})();
 		</script>

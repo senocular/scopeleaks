@@ -10,13 +10,13 @@
 	var inFirebug = (typeof scope.console == 'object') && (scope.console.firebug !== undefined);
 	
 	var scopeleaks = { 
-		snapshot: function () {
+		snapshot: function (useAsDefault) {
 			var snapshot = {};
 
 			for (var i in scope)
 				snapshot[i] = true;
 
-			original = original || snapshot;
+			original = useAsDefault ? snapshot : (original || snapshot);
 
 			return snapshot;
 		},

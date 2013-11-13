@@ -30,13 +30,21 @@ Insert the `scopeleaks.js` script just like any other module, e.g.:
 
 This module provides two functions, `snapshot`, and `leaks`, with the following signatures:
 
-	var snapshot = scopeleaks.snapshot();
+```javascript
+var snapshot = scopeleaks.snapshot([useAsDefault]);
+```
 
 This function returns a snapshot of the current status of the global scope, i.e., the _names_ of all variables, functions, etc. attached to it.
 
-	var leaks = scopeleaks.leaks(snapshot);
+* `useAsDefault`: [Optional] When true, the snapshot generated in this call will update the original, default snapshot referenced by `leaks()` if an explicit snapshot is not provided.
+
+```javascript
+var leaks = scopeleaks.leaks([snapshot]);
+```
 
 This function returns the new additions to the global scope, based on a given initial `snapshot` passed as parameter. If no snapshot is provided, it will automatically execute the `snapshot` function, to capture the current global scope.
+
+* `snapshot`: [Optional] When specified, this will be the snapshot to use when generating leaks. If not provided, the default snapshot will be used.
 
 ## Additional examples
 
